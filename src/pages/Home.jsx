@@ -23,11 +23,11 @@ const Home = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.setItem("isLoggedIn", "false");
-    navigate("/login");
+    navigate("/quiz-app/login");
   };
 
   const startQuiz = () => {
-    navigate("/quiz"); // Redirect to quiz page
+    navigate("/quiz-app/quiz"); // Redirect to quiz page
   };
 
   return (

@@ -26,7 +26,7 @@ const Login = () => {
       console.log("Response:", response);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("isLoggedIn", "true");
-      navigate("/quiz");
+      navigate("/quiz-app");
     } catch (error) {
       setError("Invalid login credentials");
     } finally {
