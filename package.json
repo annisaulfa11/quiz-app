@@ -2,7 +2,7 @@
   "name": "quiz-app",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://annisaulfa11.github.io/quiz-app",
+  "homepage": "https://annisaulfa11.github.io/quiz-app/",
   "type": "module",
   "scripts": {
     "dev": "vite",
