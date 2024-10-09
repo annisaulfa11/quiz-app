@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import axios from "axios";
-import { useRef, useState, useEffect } from "react";
-import backgroundMusic from "../assets/background.mp3"; // Path to background music
+import { useState, useEffect } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -32,7 +31,7 @@ const Home = () => {
   };
 
   return (
-    <div className="flex font-nunito min-h-screen bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 flex flex-col items-center justify-center">
+    <div className="flex font-nunito min-h-screen bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 flex-col items-center justify-center">
       <div className="flex fixed top-0 left-0 right-0  m-5 justify-between ">
         <div onClick={handleLogout} className="flex text-black bg-white items-center px-6 rounded-full gap-x-3 font-bold hover:bg-indigo-500 hover:text-white">
           <i className="bx bx-log-out text-3xl"></i>
