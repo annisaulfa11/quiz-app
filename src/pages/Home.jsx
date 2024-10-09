@@ -27,7 +27,7 @@ const Home = () => {
   };
 
   const startQuiz = () => {
-    navigate("/quiz-app/quiz"); // Redirect to quiz page
+    navigate("/quiz-app/quiz"); 
   };
 
   return (
