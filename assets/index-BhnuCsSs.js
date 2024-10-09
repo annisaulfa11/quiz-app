@@ -490,7 +490,7 @@ jl.Fragment = Ud;
 jl.jsx = La;
 jl.jsxs = La;
 Ea.exports = jl;
-var R = Ea.exports,
+var _ = Ea.exports,
   ja = { exports: {} },
   Pe = {},
   za = { exports: {} },
@@ -615,7 +615,7 @@ var R = Ea.exports,
       (d = null), (m = A), (S = !1);
     }
   }
-  var _ = !1,
+  var R = !1,
     N = null,
     O = -1,
     L = 5,
@@ -631,9 +631,9 @@ var R = Ea.exports,
       try {
         I = N(!0, T);
       } finally {
-        I ? We() : ((_ = !1), (N = null));
+        I ? We() : ((R = !1), (N = null));
       }
-    } else _ = !1;
+    } else R = !1;
   }
   var We;
   if (typeof f == "function")
@@ -652,7 +652,7 @@ var R = Ea.exports,
       w(xe, 0);
     };
   function no(T) {
-    (N = T), _ || ((_ = !0), We());
+    (N = T), R || ((R = !0), We());
   }
   function ro(T, I) {
     O = w(function () {
@@ -3288,7 +3288,7 @@ function Eo(e, t, n, r, l) {
           if (gc) k = Zp;
           else {
             k = Yp;
-            var _ = Xp;
+            var R = Xp;
           }
         else
           (S = m.nodeName) &&
@@ -3299,17 +3299,17 @@ function Eo(e, t, n, r, l) {
           yc(d, k, n, c);
           break e;
         }
-        _ && _(e, m, a),
+        R && R(e, m, a),
           e === "focusout" &&
-            (_ = m._wrapperState) &&
-            _.controlled &&
+            (R = m._wrapperState) &&
+            R.controlled &&
             m.type === "number" &&
             Wo(m, "number", m.value);
       }
-      switch (((_ = a ? tn(a) : window), e)) {
+      switch (((R = a ? tn(a) : window), e)) {
         case "focusin":
-          (uu(_) || _.contentEditable === "true") &&
-            ((bt = _), (ni = a), (Qn = null));
+          (uu(R) || R.contentEditable === "true") &&
+            ((bt = R), (ni = a), (Qn = null));
           break;
         case "focusout":
           Qn = ni = bt = null;
@@ -3356,10 +3356,10 @@ function Eo(e, t, n, r, l) {
             : ((dt = c),
               (bi = "value" in dt ? dt.value : dt.textContent),
               (Zt = !0))),
-        (_ = dl(a, O)),
-        0 < _.length &&
+        (R = dl(a, O)),
+        0 < R.length &&
           ((O = new lu(O, e, null, n, c)),
-          d.push({ event: O, listeners: _ }),
+          d.push({ event: O, listeners: R }),
           N ? (O.data = N) : ((N = mc(n)), N !== null && (O.data = N)))),
         (N = Vp ? Wp(e, n) : Qp(e, n)) &&
           ((a = dl(a, "onBeforeInput")),
@@ -3972,8 +3972,8 @@ function Ic(e) {
         case Yt:
           return (p = p.get(E.key === null ? h : E.key) || null), a(f, p, E, k);
         case ut:
-          var _ = E._init;
-          return S(p, f, h, _(E._payload), k);
+          var R = E._init;
+          return S(p, f, h, R(E._payload), k);
       }
       if (Un(E) || Pn(E)) return (p = p.get(h) || null), c(f, p, E, k, null);
       Mr(f, E);
@@ -3982,7 +3982,7 @@ function Ic(e) {
   }
   function y(p, f, h, E) {
     for (
-      var k = null, _ = null, N = f, O = (f = 0), L = null;
+      var k = null, R = null, N = f, O = (f = 0), L = null;
       N !== null && O < h.length;
       O++
     ) {
@@ -3994,8 +3994,8 @@ function Ic(e) {
       }
       e && N && j.alternate === null && t(p, N),
         (f = o(j, f, O)),
-        _ === null ? (k = j) : (_.sibling = j),
-        (_ = j),
+        R === null ? (k = j) : (R.sibling = j),
+        (R = j),
         (N = L);
     }
     if (O === h.length) return n(p, N), H && Ot(p, O), k;
@@ -4003,7 +4003,7 @@ function Ic(e) {
       for (; O < h.length; O++)
         (N = d(p, h[O], E)),
           N !== null &&
-            ((f = o(N, f, O)), _ === null ? (k = N) : (_.sibling = N), (_ = N));
+            ((f = o(N, f, O)), R === null ? (k = N) : (R.sibling = N), (R = N));
       return H && Ot(p, O), k;
     }
     for (N = r(p, N); O < h.length; O++)
@@ -4011,8 +4011,8 @@ function Ic(e) {
         L !== null &&
           (e && L.alternate !== null && N.delete(L.key === null ? O : L.key),
           (f = o(L, f, O)),
-          _ === null ? (k = L) : (_.sibling = L),
-          (_ = L));
+          R === null ? (k = L) : (R.sibling = L),
+          (R = L));
     return (
       e &&
         N.forEach(function (K) {
@@ -4027,7 +4027,7 @@ function Ic(e) {
     if (typeof k != "function") throw Error(x(150));
     if (((h = k.call(h)), h == null)) throw Error(x(151));
     for (
-      var _ = (k = null), N = f, O = (f = 0), L = null, j = h.next();
+      var R = (k = null), N = f, O = (f = 0), L = null, j = h.next();
       N !== null && !j.done;
       O++, j = h.next()
     ) {
@@ -4039,8 +4039,8 @@ function Ic(e) {
       }
       e && N && K.alternate === null && t(p, N),
         (f = o(K, f, O)),
-        _ === null ? (k = K) : (_.sibling = K),
-        (_ = K),
+        R === null ? (k = K) : (R.sibling = K),
+        (R = K),
         (N = L);
     }
     if (j.done) return n(p, N), H && Ot(p, O), k;
@@ -4048,7 +4048,7 @@ function Ic(e) {
       for (; !j.done; O++, j = h.next())
         (j = d(p, j.value, E)),
           j !== null &&
-            ((f = o(j, f, O)), _ === null ? (k = j) : (_.sibling = j), (_ = j));
+            ((f = o(j, f, O)), R === null ? (k = j) : (R.sibling = j), (R = j));
       return H && Ot(p, O), k;
     }
     for (N = r(p, N); !j.done; O++, j = h.next())
@@ -4056,8 +4056,8 @@ function Ic(e) {
         j !== null &&
           (e && j.alternate !== null && N.delete(j.key === null ? O : j.key),
           (f = o(j, f, O)),
-          _ === null ? (k = j) : (_.sibling = j),
-          (_ = j));
+          R === null ? (k = j) : (R.sibling = j),
+          (R = j));
     return (
       e &&
         N.forEach(function (xe) {
@@ -4079,34 +4079,34 @@ function Ic(e) {
       switch (h.$$typeof) {
         case Pr:
           e: {
-            for (var k = h.key, _ = f; _ !== null; ) {
-              if (_.key === k) {
+            for (var k = h.key, R = f; R !== null; ) {
+              if (R.key === k) {
                 if (((k = h.type), k === Gt)) {
-                  if (_.tag === 7) {
-                    n(p, _.sibling),
-                      (f = l(_, h.props.children)),
+                  if (R.tag === 7) {
+                    n(p, R.sibling),
+                      (f = l(R, h.props.children)),
                       (f.return = p),
                       (p = f);
                     break e;
                   }
                 } else if (
-                  _.elementType === k ||
+                  R.elementType === k ||
                   (typeof k == "object" &&
                     k !== null &&
                     k.$$typeof === ut &&
-                    Cu(k) === _.type)
+                    Cu(k) === R.type)
                 ) {
-                  n(p, _.sibling),
-                    (f = l(_, h.props)),
-                    (f.ref = zn(p, _, h)),
+                  n(p, R.sibling),
+                    (f = l(R, h.props)),
+                    (f.ref = zn(p, R, h)),
                     (f.return = p),
                     (p = f);
                   break e;
                 }
-                n(p, _);
+                n(p, R);
                 break;
-              } else t(p, _);
-              _ = _.sibling;
+              } else t(p, R);
+              R = R.sibling;
             }
             h.type === Gt
               ? ((f = Dt(h.props.children, p.mode, E, h.key)),
@@ -4120,8 +4120,8 @@ function Ic(e) {
           return i(p);
         case Yt:
           e: {
-            for (_ = h.key; f !== null; ) {
-              if (f.key === _)
+            for (R = h.key; f !== null; ) {
+              if (f.key === R)
                 if (
                   f.tag === 4 &&
                   f.stateNode.containerInfo === h.containerInfo &&
@@ -4143,7 +4143,7 @@ function Ic(e) {
           }
           return i(p);
         case ut:
-          return (_ = h._init), w(p, f, _(h._payload), E);
+          return (R = h._init), w(p, f, R(h._payload), E);
       }
       if (Un(h)) return y(p, f, h, E);
       if (Pn(h)) return g(p, f, h, E);
@@ -11689,11 +11689,11 @@ const iy = async (e) => {
           (w = await sy(c, r)) !== 0
         ) {
           let k = new Request(t, { method: "POST", body: r, duplex: "half" }),
-            _;
+            R;
           if (
             (v.isFormData(r) &&
-              (_ = k.headers.get("content-type")) &&
-              c.setContentType(_),
+              (R = k.headers.get("content-type")) &&
+              c.setContentType(R),
             k.body)
           ) {
             const [N, O] = ca(w, Ol(fa(u)));
@@ -11718,8 +11718,8 @@ const iy = async (e) => {
           ["status", "statusText", "headers"].forEach((L) => {
             k[L] = f[L];
           });
-          const _ = v.toFiniteNumber(f.headers.get("content-length")),
-            [N, O] = (s && ca(_, Ol(fa(s), !0))) || [];
+          const R = v.toFiniteNumber(f.headers.get("content-length")),
+            [N, O] = (s && ca(R, Ol(fa(s), !0))) || [];
           f = new Response(
             pa(f.body, ha, N, () => {
               O && O(), g && g();
@@ -11731,8 +11731,8 @@ const iy = async (e) => {
         let E = await Ll[v.findKey(Ll, a) || "text"](f, e);
         return (
           !h && g && g(),
-          await new Promise((k, _) => {
-            ad(k, _, {
+          await new Promise((k, R) => {
+            ad(k, R, {
               data: E,
               headers: Ee.from(f.headers),
               status: f.status,
@@ -12223,7 +12223,7 @@ J.getAdapter = hd.getAdapter;
 J.HttpStatusCode = Di;
 J.default = J;
 const Bs = ({ text: e, type: t, onClick: n, className: r }) =>
-    R.jsx("button", {
+    _.jsx("button", {
       type: t,
       onClick: n,
       className: `btn ${r}`,
@@ -12237,7 +12237,7 @@ const Bs = ({ text: e, type: t, onClick: n, className: r }) =>
     placeholder: l,
     className: o,
   }) =>
-    R.jsx("input", {
+    _.jsx("input", {
       id: e,
       type: t,
       value: n,
@@ -12248,7 +12248,7 @@ const Bs = ({ text: e, type: t, onClick: n, className: r }) =>
       required: !0,
     }),
   wa = ({ htmlFor: e, children: t, className: n }) =>
-    R.jsx("label", {
+    _.jsx("label", {
       htmlFor: e,
       className: "block text-white mb-1 font-extrabold",
       children: t,
@@ -12276,27 +12276,27 @@ const Bs = ({ text: e, type: t, onClick: n, className: r }) =>
           u(!1);
         }
       };
-    return R.jsxs("div", {
+    return _.jsxs("div", {
       className:
         "min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600",
       children: [
-        R.jsx("div", {
-          children: R.jsxs("h2", {
+        _.jsx("div", {
+          children: _.jsxs("h2", {
             className:
               "text-5xl mb-10 text-center font-monserrat font-extrabold text-white text-shadow animate-bounce ",
-            children: ["ANIME ", R.jsx("br", {}), " QUIZ"],
+            children: ["ANIME ", _.jsx("br", {}), " QUIZ"],
           }),
         }),
-        R.jsx("div", {
-          className: "max-w-md w-full",
-          children: R.jsxs("form", {
+        _.jsx("div", {
+          className: "max-w-md w-full px-10 md:px-0",
+          children: _.jsxs("form", {
             onSubmit: a,
             className: "space-y-4 font-nunito",
             children: [
-              R.jsxs("div", {
+              _.jsxs("div", {
                 children: [
-                  R.jsx(wa, { htmlFor: "email", children: "Email" }),
-                  R.jsx(va, {
+                  _.jsx(wa, { htmlFor: "email", children: "Email" }),
+                  _.jsx(va, {
                     id: "email",
                     name: "email",
                     type: "email",
@@ -12306,10 +12306,10 @@ const Bs = ({ text: e, type: t, onClick: n, className: r }) =>
                   }),
                 ],
               }),
-              R.jsxs("div", {
+              _.jsxs("div", {
                 children: [
-                  R.jsx(wa, { htmlFor: "password", children: "Password" }),
-                  R.jsx(va, {
+                  _.jsx(wa, { htmlFor: "password", children: "Password" }),
+                  _.jsx(va, {
                     id: "password",
                     name: "password",
                     type: "password",
@@ -12319,7 +12319,7 @@ const Bs = ({ text: e, type: t, onClick: n, className: r }) =>
                   }),
                 ],
               }),
-              R.jsx(Bs, {
+              _.jsx(Bs, {
                 type: "submit",
                 text: "LOGIN",
                 className:
@@ -12327,7 +12327,7 @@ const Bs = ({ text: e, type: t, onClick: n, className: r }) =>
                 disabled: s,
               }),
               o &&
-                R.jsx("p", {
+                _.jsx("p", {
                   className: "text-white text-center",
                   children: o,
                 }),
@@ -12422,7 +12422,7 @@ const Bs = ({ text: e, type: t, onClick: n, className: r }) =>
           localStorage.removeItem("userAnswers"),
           localStorage.removeItem("timeLeft");
       },
-      _ = async () => {
+      R = async () => {
         localStorage.removeItem("currentQuestionIndex"),
           localStorage.removeItem("userAnswers"),
           localStorage.removeItem("timeLeft"),
@@ -12438,69 +12438,77 @@ const Bs = ({ text: e, type: t, onClick: n, className: r }) =>
       },
       N = () => {
         if (e.length === 0)
-          return R.jsx("p", { children: "Loading questions..." });
+          return _.jsx("div", {
+            className: "flex items-center justify-center min-h-screen",
+            children: _.jsx("div", { className: "spinner" }),
+          });
         const L = e[n],
           j = L.question
             .replace(/&quot;/g, '"')
             .replace(/&#039;/g, "'")
             .replace(/&eacute;/g, "é")
             .replace(/&amp;/g, "&");
-        return R.jsxs("div", {
+        return _.jsxs("div", {
           className: "flex flex-col",
           children: [
-            R.jsxs("div", {
+            _.jsxs("div", {
               className:
                 "fixed top-0 left-0 right-0 flex p-4 md:p-10 justify-between w-full md:text-3xl font-extrabold text-white text-shadow",
               children: [
-                R.jsx("div", {
-                  children: R.jsxs("p", { children: ["⏳ ", u, "s"] }),
+                _.jsx("div", {
+                  children: _.jsxs("p", { children: ["⏳ ", u, "s"] }),
                 }),
-                R.jsx("div", {
-                  children: R.jsxs("p", {
+                _.jsx("div", {
+                  children: _.jsxs("p", {
                     children: ["Question ", n + 1, " of ", e.length],
                   }),
                 }),
-                R.jsx("div", {
-                  children: R.jsxs("p", { children: ["Answered: ", l.length] }),
+                _.jsx("div", {
+                  children: _.jsxs("p", { children: ["Answered: ", l.length] }),
                 }),
               ],
             }),
-            R.jsx("div", {
-              className:
-                "flex bg-white md:mx-10 md:mt-28 mt-20 mx-4 shadow-md rounded-lg p-4 min-h-32 items-center justify-center",
-              children: R.jsx("h2", {
-                className: "text-xl font-bold",
-                children: j,
-              }),
-            }),
-            R.jsx("div", {
-              className: "md:m-10 pt-10 mx-4",
-              children: R.jsx("div", {
-                className: "space-y-2",
-                children: L.incorrect_answers
-                  .concat(L.correct_answer)
-                  .map((K, xe) => {
-                    const We = K === L.correct_answer,
-                      to =
-                        m === K
-                          ? We
-                            ? "bg-green-400"
-                            : "bg-red-400"
-                          : "bg-white";
-                    return R.jsx(
-                      Bs,
-                      {
-                        text: K.replace(/&quot;/g, '"')
-                          .replace(/&#039;/g, "'")
-                          .replace(/&eacute;/g, "é")
-                          .replace(/&amp;/g, "&"),
-                        onClick: () => E(K),
-                        className: `w-full text-black font-bold py-2 rounded-md shadow-xl transition duration-300 ${to}`,
-                      },
-                      xe
-                    );
+            _.jsxs("div", {
+              className: "flex flex-col min-h-screen justify-center",
+              children: [
+                _.jsx("div", {
+                  className:
+                    "flex bg-white md:mx-10 md:mt-28 mt-20 mx-4 shadow-md rounded-lg p-4 min-h-32 items-center justify-center",
+                  children: _.jsx("h2", {
+                    className: "text-xl font-bold",
+                    children: j,
                   }),
-              }),
+                }),
+                _.jsx("div", {
+                  className: "md:m-10 pt-10 mx-4",
+                  children: _.jsx("div", {
+                    className: "space-y-2",
+                    children: L.incorrect_answers
+                      .concat(L.correct_answer)
+                      .map((K, xe) => {
+                        const We = K === L.correct_answer,
+                          to =
+                            m === K
+                              ? We
+                                ? "bg-green-400"
+                                : "bg-red-400"
+                              : "bg-white";
+                        return _.jsx(
+                          Bs,
+                          {
+                            text: K.replace(/&quot;/g, '"')
+                              .replace(/&#039;/g, "'")
+                              .replace(/&eacute;/g, "é")
+                              .replace(/&amp;/g, "&"),
+                            onClick: () => E(K),
+                            className: `w-full text-black font-bold py-2 rounded-md shadow-xl transition duration-300 ${to}`,
+                          },
+                          xe
+                        );
+                      }),
+                  }),
+                }),
+              ],
             }),
           ],
         });
@@ -12508,32 +12516,32 @@ const Bs = ({ text: e, type: t, onClick: n, className: r }) =>
       O = () => {
         const L = e.length,
           j = L - c;
-        return R.jsxs("div", {
+        return _.jsxs("div", {
           className:
-            "flex flex-col md:mx-auto mx-4 my-24 bg-white shadow-md rounded-lg p-8 md:max-w-md",
+            "flex flex-col md:mx-auto mx-4 md:my-24 bg-white shadow-md rounded-lg p-8 md:max-w-md justify-center my-44",
           children: [
-            R.jsx("h2", {
+            _.jsx("h2", {
               className: "text-2xl font-bold mb-4",
               children: "Results",
             }),
-            R.jsxs("p", {
+            _.jsxs("p", {
               className: "mb-4",
               children: ["You answered ", l.length, " questions."],
             }),
-            R.jsxs("p", {
+            _.jsxs("p", {
               className: "mb-4",
               children: ["Correct Answers: ", c],
             }),
-            R.jsxs("p", {
+            _.jsxs("p", {
               className: "mb-4",
               children: ["Wrong Answers: ", j],
             }),
-            R.jsxs("p", {
+            _.jsxs("p", {
               className: "mb-4",
               children: ["Total Questions: ", L],
             }),
-            R.jsx("button", {
-              onClick: _,
+            _.jsx("button", {
+              onClick: R,
               className:
                 "w-full bg-indigo-500 text-white py-2 rounded-md hover:bg-indigo-700 transition duration-300 mt-4",
               children: "Restart Quiz",
@@ -12541,10 +12549,10 @@ const Bs = ({ text: e, type: t, onClick: n, className: r }) =>
           ],
         });
       };
-    return R.jsx("div", {
+    return _.jsx("div", {
       className:
         "min-h-screen flex justify-center md:items-center font-nunito bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600",
-      children: R.jsx("div", { className: "w-full", children: i ? O() : N() }),
+      children: _.jsx("div", { className: "w-full", children: i ? O() : N() }),
     });
   },
   vy = () => {
@@ -12569,52 +12577,53 @@ const Bs = ({ text: e, type: t, onClick: n, className: r }) =>
       o = () => {
         e("/quiz-app/quiz");
       };
-    return R.jsxs("div", {
+    return _.jsxs("div", {
       className:
         "flex font-nunito min-h-screen bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 flex-col items-center justify-center",
       children: [
-        R.jsxs("div", {
+        _.jsxs("div", {
           className: "flex fixed top-0 left-0 right-0  m-5 justify-between ",
           children: [
-            R.jsxs("div", {
+            _.jsxs("div", {
               onClick: l,
               className:
                 "flex text-black bg-white items-center px-6 rounded-full gap-x-3 font-bold hover:bg-indigo-500 hover:text-white",
               children: [
-                R.jsx("i", { className: "bx bx-log-out text-3xl" }),
-                R.jsx("h4", { children: "Logout" }),
+                _.jsx("i", { className: "bx bx-log-out text-3xl" }),
+                _.jsx("h4", { children: "Logout" }),
               ],
             }),
-            R.jsx("div", {
+            _.jsx("div", {
               className:
                 "flex flex-row gap-x-3 font-bold items-center bg-white rounded-full px-7 py-1",
               children: t
-                ? R.jsxs(R.Fragment, {
+                ? _.jsxs(_.Fragment, {
                     children: [
-                      R.jsx("img", {
+                      _.jsx("img", {
                         src: t.avatar,
                         alt: `${t.first_name}'s avatar`,
                         className: "w-10 rounded-full",
                       }),
-                      R.jsxs("h4", {
+                      _.jsxs("h4", {
                         children: [t.first_name, " ", t.last_name],
                       }),
                     ],
                   })
-                : R.jsx("p", { children: "Loading..." }),
+                : _.jsx("p", { children: "Loading..." }),
             }),
           ],
         }),
-        R.jsxs("div", {
-          className: "",
+        _.jsxs("div", {
+          className: "px-5 justify-center",
           children: [
-            R.jsx("h1", {
-              className: "text-4xl text-white mb-12 font-extrabold text-shadow",
+            _.jsx("h1", {
+              className:
+                "text-4xl text-center text-white mb-12 font-extrabold text-shadow",
               children: "Welcome to the Anime Quiz!",
             }),
-            R.jsx("div", {
+            _.jsx("div", {
               className: "flex justify-center",
-              children: R.jsx(Bs, {
+              children: _.jsx(Bs, {
                 onClick: o,
                 text: "Start Quiz",
                 className:
@@ -12629,23 +12638,23 @@ const Bs = ({ text: e, type: t, onClick: n, className: r }) =>
   Sa = ({ children: e }) =>
     localStorage.getItem("isLoggedIn") === "true"
       ? e
-      : R.jsx(jm, { to: "/quiz-app/login" }),
+      : _.jsx(jm, { to: "/quiz-app/login" }),
   wy = () =>
-    R.jsx(Dm, {
-      children: R.jsxs(Im, {
+    _.jsx(Dm, {
+      children: _.jsxs(Im, {
         children: [
-          R.jsx(nl, { path: "/quiz-app/login", element: R.jsx(py, {}) }),
-          R.jsx(nl, {
+          _.jsx(nl, { path: "/quiz-app/login", element: _.jsx(py, {}) }),
+          _.jsx(nl, {
             path: "/quiz-app",
-            element: R.jsx(Sa, { children: R.jsx(vy, {}) }),
+            element: _.jsx(Sa, { children: _.jsx(vy, {}) }),
           }),
-          R.jsx(nl, {
+          _.jsx(nl, {
             path: "/quiz-app/quiz",
-            element: R.jsx(Sa, { children: R.jsx(gy, {}) }),
+            element: _.jsx(Sa, { children: _.jsx(gy, {}) }),
           }),
         ],
       }),
     });
 If(document.getElementById("root")).render(
-  R.jsx(C.StrictMode, { children: R.jsx(wy, {}) })
+  _.jsx(C.StrictMode, { children: _.jsx(wy, {}) })
 );
