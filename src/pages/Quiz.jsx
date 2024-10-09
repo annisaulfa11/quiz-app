@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Button from "../components/Button";
-import correctSound from "../assets/correct.wav"; // Path to correct answer sound
+import correctSound from "../assets/correct.wav"; 
 import incorrectSound from "../assets/incorrect.wav";
-import backgroundMusic from "../assets/background.mp3"; // Path to background music
+import backgroundMusic from "../assets/background.mp3";
 
 const Quiz = () => {
   const [questions, setQuestions] = useState([]);
@@ -12,10 +12,10 @@ const Quiz = () => {
   const [showResults, setShowResults] = useState(false);
   const [timeLeft, setTimeLeft] = useState(60);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState(null); // Track the selected answer
+  const [selectedAnswer, setSelectedAnswer] = useState(null); 
   const timerRef = useRef(null);
-  const audioRef = useRef(new Audio()); // Create a ref for the audio element
-  const backgroundMusicRef = useRef(new Audio(backgroundMusic)); // Background music ref
+  const audioRef = useRef(new Audio()); 
+  const backgroundMusicRef = useRef(new Audio(backgroundMusic)); 
 
   
   const fetchQuestions = async () => {
@@ -62,13 +62,13 @@ const Quiz = () => {
       setCorrectAnswersCount(storedCorrectAnswers);
     }
 
-    backgroundMusicRef.current.loop = true; // Set to loop
+    backgroundMusicRef.current.loop = true; 
     backgroundMusicRef.current.play();
     startTimer();
 
     return () => {
       clearInterval(timerRef.current);
-      backgroundMusicRef.current.pause(); // Pause the music when the component unmounts
+      backgroundMusicRef.current.pause(); 
       backgroundMusicRef.current.currentTime = 0;
     }
   }, []);
@@ -95,7 +95,7 @@ const Quiz = () => {
   };
 
   const handleAnswer = (answer) => {
-    setSelectedAnswer(answer); // Set selected answer
+    setSelectedAnswer(answer); 
     const isCorrect = answer === questions[currentQuestionIndex].correct_answer;
     playSound(isCorrect);
 
@@ -119,8 +119,8 @@ const Quiz = () => {
       } else {
         handleEndQuiz();
       }
-      setSelectedAnswer(null); // Reset selected answer after moving to next question
-    }, 500); // Delay to allow user to see correct/incorrect color
+      setSelectedAnswer(null); 
+    }, 500); 
   };
 
   const handleEndQuiz = () => {
@@ -146,7 +146,7 @@ const Quiz = () => {
     setTimeLeft(60);
     setCorrectAnswersCount(0);
 
-    // Start timer after resetting state
+    
     startTimer();
   };
 
@@ -182,7 +182,7 @@ const Quiz = () => {
           <h2 className="text-xl font-bold">{cleanQuestion}</h2>
         </div>
 
-        {/* Options */}
+    
         <div className="md:m-10 pt-10 mx-4">
           <div className="space-y-2">
             {question.incorrect_answers
