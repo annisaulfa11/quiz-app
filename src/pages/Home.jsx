@@ -1,44 +1,43 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/features/authSlice";
+import { fetchUser } from "../redux/features/userSlice";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [userData, setUserData] = useState(null);
-
-  const fetchUser = async () => {
-    try {
-      const response = await axios.get("https://reqres.in/api/users/4");
-      setUserData(response.data.data);
-    } catch (error) {
-      console.error("Error fetching user:", error);
-    }
-  };
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user.data);
+  const status = useSelector((state) => state.user.status);
+  const error = useSelector((state) => state.user.error);
 
   useEffect(() => {
-    fetchUser();
-  }, []);
+    dispatch(fetchUser());
+  }, [dispatch]);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.setItem("isLoggedIn", "false");
+    dispatch(logout());
     navigate("/quiz-app/login");
   };
 
   const startQuiz = () => {
-    navigate("/quiz-app/quiz"); // Redirect to quiz page
+    navigate("/quiz-app/quiz");
   };
 
   return (
-    <div className="flex font-nunito min-h-screen bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 flex-col items-center justify-center">
+    <div className="flex font-nunito min-h-screen bg-blue-500  flex-col items-center justify-center">
       <div className="flex fixed top-0 left-0 right-0  m-5 justify-between ">
-        <div onClick={handleLogout} className="flex text-black bg-white items-center px-6 rounded-full gap-x-3 font-bold hover:bg-indigo-500 hover:text-white">
+        <div onClick={handleLogout} className="flex outline text-black bg-white items-center px-6 rounded-lg gap-x-3 font-bold hover:bg-indigo-500 hover:text-white">
           <i className="bx bx-log-out text-3xl"></i>
           <h4>Logout</h4>
         </div>
-        <div className="flex flex-row gap-x-3 font-bold items-center bg-white rounded-full px-7 py-1">
-          {userData ? (
+        <div className="flex flex-row gap-x-3 outline font-bold items-center bg-white rounded-lg px-7 py-1">
+          {status === "loading" ? (
+            <p>Loading...</p>
+          ) : status === "failed" ? (
+            <p>Error: {error}</p>
+          ) : userData ? (
             <>
               <img
                 src={userData.avatar}
@@ -50,12 +49,12 @@ const Home = () => {
               </h4>
             </>
           ) : (
-            <p>Loading...</p>
+            <p>No user data found.</p>
           )}
         </div>
       </div>
-      <div className="">
-        <h1 className="text-4xl text-white mb-12 font-extrabold text-shadow">
+      <div className="px-5 justify-center">
+        <h1 className="text-4xl text-center text-white mb-12 font-extrabold text-shadow">
           Welcome to the Anime Quiz!
         </h1>
 
@@ -63,7 +62,7 @@ const Home = () => {
           <Button
             onClick={startQuiz}
             text={"Start Quiz"}
-            className="bg-green-500 text-white font-bold px-6 py-3 rounded-md shadow-lg hover:bg-green-700 animate-bounce"
+            className="bg-green-500 text-white font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-green-700 animate-bounce"
           />
         </div>
       </div>

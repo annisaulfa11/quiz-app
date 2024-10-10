@@ -1,27 +1,35 @@
 import { useEffect, useState, useRef } from "react";
+import axios from "axios";
 import Button from "../components/Button";
-import correctSound from "../assets/correct.wav";
+import correctSound from "../assets/correct.wav"; 
 import incorrectSound from "../assets/incorrect.wav";
-import backgroundMusic from "../assets/background.mp3";
-import { useDispatch } from "react-redux";
-import { fetchQuestions } from "../redux/features/quizSlice";
-import { useSelector } from "react-redux";
+import backgroundMusic from "../assets/background.mp3"; 
 
 const Quiz = () => {
-  const dispatch = useDispatch();
-  const questions = useSelector((state) => state.quiz.questions);
+  const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [timeLeft, setTimeLeft] = useState(60);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null); 
   const timerRef = useRef(null);
-  const audioRef = useRef(new Audio());
-  const backgroundMusicRef = useRef(new Audio(backgroundMusic));
+  const audioRef = useRef(new Audio()); 
+  const backgroundMusicRef = useRef(new Audio(backgroundMusic)); 
+
+  const fetchQuestions = async () => {
+    try {
+      const response = await axios.get(
+        "https://opentdb.com/api.php?amount=10&category=31"
+      );
+      setQuestions(response.data.results);
+    } catch (error) {
+      console.error("Error fetching questions:", error);
+    }
+  };
 
   useEffect(() => {
-    dispatch(fetchQuestions());
+    fetchQuestions();
   }, []);
 
   useEffect(() => {
@@ -53,31 +61,31 @@ const Quiz = () => {
       setCorrectAnswersCount(storedCorrectAnswers);
     }
 
-    backgroundMusicRef.current.loop = true;
+    backgroundMusicRef.current.loop = true; // Set to loop
     backgroundMusicRef.current.play();
     startTimer();
 
     return () => {
       clearInterval(timerRef.current);
-      backgroundMusicRef.current.pause();
+      backgroundMusicRef.current.pause(); // Pause the music when the component unmounts
       backgroundMusicRef.current.currentTime = 0;
     };
   }, []);
 
   const startTimer = () => {
     clearInterval(timerRef.current);
-    // timerRef.current = setInterval(() => {
-    //   setTimeLeft((prevTime) => {
-    //     if (prevTime <= 1) {
-    //       clearInterval(timerRef.current);
-    //       handleEndQuiz();
-    //       return 0;
-    //     }
-    //     const newTime = prevTime - 1;
-    //     localStorage.setItem("timeLeft", newTime);
-    //     return newTime;
-    //   });
-    // }, 1000);
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime <= 1) {
+          clearInterval(timerRef.current);
+          handleEndQuiz();
+          return 0;
+        }
+        const newTime = prevTime - 1;
+        localStorage.setItem("timeLeft", newTime);
+        return newTime;
+      });
+    }, 1000);
   };
 
   const playSound = (isCorrect) => {
@@ -86,7 +94,7 @@ const Quiz = () => {
   };
 
   const handleAnswer = (answer) => {
-    setSelectedAnswer(answer);
+    setSelectedAnswer(answer); // Set selected answer
     const isCorrect = answer === questions[currentQuestionIndex].correct_answer;
     playSound(isCorrect);
 
@@ -110,8 +118,8 @@ const Quiz = () => {
       } else {
         handleEndQuiz();
       }
-      setSelectedAnswer(null);
-    }, 500);
+      setSelectedAnswer(null); // Reset selected answer after moving to next question
+    }, 500); // Delay to allow user to see correct/incorrect color
   };
 
   const handleEndQuiz = () => {
@@ -159,7 +167,7 @@ const Quiz = () => {
 
     return (
       <div className="flex flex-col">
-        <div className="fixed top-0 left-0 right-0 flex p-4 md:p-10 justify-between w-full md:text-3xl text-lg font-extrabold text-black">
+        <div className="fixed top-0 left-0 right-0 flex p-4 md:p-10 justify-between w-full md:text-3xl font-extrabold text-white text-shadow">
           <div>
             <p>&#9203; {timeLeft}s</p>
           </div>
@@ -173,7 +181,7 @@ const Quiz = () => {
           </div>
         </div>
         <div className="flex flex-col min-h-screen justify-center">
-          <div className="flex bg-white md:mx-10 md:mt-28 mt-20 mx-4 shadow-md rounded-lg outline p-4 min-h-32 items-center justify-center">
+          <div className="flex bg-white md:mx-10 md:mt-28 mt-20 mx-4 shadow-md rounded-lg p-4 min-h-32 items-center justify-center">
             <h2 className="text-xl font-bold">{cleanQuestion}</h2>
           </div>
 
@@ -199,7 +207,7 @@ const Quiz = () => {
                         .replace(/&eacute;/g, "é")
                         .replace(/&amp;/g, "&")}
                       onClick={() => handleAnswer(answer)}
-                      className={`w-full text-black outline font-bold py-2 rounded-lg shadow-xl transition duration-300 ${optionClass}`}
+                      className={`w-full text-black font-bold py-2 rounded-md shadow-xl transition duration-300 ${optionClass}`}
                     />
                   );
                 })}
@@ -215,8 +223,7 @@ const Quiz = () => {
     const wrongAnswers = totalQuestions - correctAnswersCount;
 
     return (
-      <div className="flex items-center max-w-full justify-center min-h-screen mx-10">
-        <div className="flex flex-col w-full sm:max-w-96 bg-white shadow-md rounded-lg p-8 justify-center">
+      <div className="flex flex-col md:mx-auto mx-4 md:my-24 bg-white shadow-md rounded-lg p-8 md:max-w-md justify-center my-44">
         <h2 className="text-2xl font-bold mb-4">Results</h2>
         <p className="mb-4">You answered {userAnswers.length} questions.</p>
         <p className="mb-4">Correct Answers: {correctAnswersCount}</p>
@@ -224,17 +231,16 @@ const Quiz = () => {
         <p className="mb-4">Total Questions: {totalQuestions}</p>
         <button
           onClick={handleRestartQuiz}
-          className="w-full bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-900 transition duration-300 mt-4"
+          className="w-full bg-indigo-500 text-white py-2 rounded-md hover:bg-indigo-700 transition duration-300 mt-4"
         >
           Restart Quiz
         </button>
-      </div>
       </div>
     );
   };
 
   return (
-    <div className="min-h-screen flex justify-center md:items-center font-nunito bg-blue-500 ">
+    <div className="min-h-screen flex justify-center md:items-center font-nunito bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600">
       <div className="w-full">
         {showResults ? renderResults() : renderQuestion()}
       </div>

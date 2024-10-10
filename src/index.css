@@ -3,33 +3,21 @@
 @tailwind utilities;
 
 .text-shadow {
-    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Customize as needed */
-  }
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Customize as needed */
+}
 
-  .feedback-message {
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 1rem;
-    border-radius: 5px;
-    font-size: 1.5rem;
-    color: white;
-    opacity: 0;
-    z-index: 10;
+.spinner {
+  border: 8px solid rgba(255, 255, 255, 0.3); /* Light border */
+  border-left-color: #fff; /* Main color */
+  border-radius: 50%; /* Make it round */
+  width: 40px; /* Size of the spinner */
+  height: 40px; /* Size of the spinner */
+  animation: spin 1s linear infinite; /* Spinning animation */
+  margin: 0 auto; /* Center the spinner */
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg); /* Full rotation */
   }
-  
-  .feedback-message.Correct {
-    background-color: green;
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-  
-  .feedback-message.Incorrect {
-    background-color: red;
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.1);
-  }
-  
-  
+}

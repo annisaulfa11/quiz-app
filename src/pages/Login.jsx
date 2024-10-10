@@ -1,47 +1,35 @@
 import { useState } from "react";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../redux/features/authSlice"; 
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { useNavigate } from "react-router-dom";
 import Label from "../components/Label";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isLoading, error } = useSelector((state) => state.auth); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    setError("");
-
-    try {
-      const response = await axios.post("https://reqres.in/api/login", {
-        email,
-        password,
-      });
-
-      console.log("Response:", response);
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("isLoggedIn", "true");
-      navigate("/quiz-app");
-    } catch (error) {
-      setError("Invalid login credentials");
-    } finally {
-      setIsLoading(false);
-    }
+    dispatch(login({ email, password })).then((result) => {
+      if (result.meta.requestStatus === "fulfilled") {
+        navigate("/quiz-app"); 
+      }
+    });
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-blue-500">
       <div>
         <h2 className="text-5xl mb-10 text-center font-monserrat font-extrabold text-white text-shadow animate-bounce ">
           ANIME <br /> QUIZ
         </h2>
       </div>
-      <div className="max-w-md w-full">
+      <div className="max-w-md w-full px-10 md:px-0">
         <form onSubmit={handleLogin} className="space-y-4 font-nunito">
           <div>
             <Label htmlFor="email">Email</Label>
@@ -68,11 +56,10 @@ const Login = () => {
           <Button
             type="submit"
             text="LOGIN"
-            className="w-full bg-white text-indigo-700 font-extrabold py-2 mt-7 rounded-md hover:bg-indigo-700 hover:text-white transition duration-300"
+            className="w-full bg-white text-blue-900 font-extrabold py-2 mt-7 rounded-lg hover:bg-blue-900 hover:text-white transition duration-300"
             disabled={isLoading}
           />
           {error && <p className="text-white text-center">{error}</p>}
-
         </form>
       </div>
     </div>
