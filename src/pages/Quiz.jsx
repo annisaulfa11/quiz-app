@@ -7,13 +7,24 @@ import { useDispatch } from "react-redux";
 import { fetchQuestions } from "../redux/features/quizSlice";
 import { useSelector } from "react-redux";
 
+// Function to shuffle an array
+const shuffleArray = (array) => {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+};
+
 const Quiz = () => {
   const dispatch = useDispatch();
   const questions = useSelector((state) => state.quiz.questions);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [shuffledAnswers, setShuffledAnswers] = useState([]); // State for shuffled answers
   const [userAnswers, setUserAnswers] = useState([]);
   const [showResults, setShowResults] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(30);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null); 
   const timerRef = useRef(null);
@@ -22,7 +33,7 @@ const Quiz = () => {
 
   useEffect(() => {
     dispatch(fetchQuestions());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const storedIndex = localStorage.getItem("currentQuestionIndex");
@@ -63,6 +74,17 @@ const Quiz = () => {
       backgroundMusicRef.current.currentTime = 0;
     };
   }, []);
+
+  useEffect(() => {
+    // When the current question changes, shuffle answers once
+    if (questions.length > 0) {
+      const question = questions[currentQuestionIndex];
+      const answers = shuffleArray(
+        question.incorrect_answers.concat(question.correct_answer)
+      );
+      setShuffledAnswers(answers); // Store shuffled answers in state
+    }
+  }, [currentQuestionIndex, questions]);
 
   const startTimer = () => {
     clearInterval(timerRef.current);
@@ -134,10 +156,8 @@ const Quiz = () => {
     setCurrentQuestionIndex(0);
     setUserAnswers([]);
     setShowResults(false);
-    setTimeLeft(60);
+    setTimeLeft(30);
     setCorrectAnswersCount(0);
-
-    
     startTimer();
   };
 
@@ -173,36 +193,34 @@ const Quiz = () => {
           </div>
         </div>
         <div className="flex flex-col min-h-screen justify-center">
-          <div className="flex bg-white md:mx-10 md:mt-28 mt-20 mx-4 shadow-md rounded-lg outline p-4 min-h-32 items-center justify-center">
+          <div className="flex bg-white md:mx-10 md:mt-28 mx-4 shadow-md rounded-lg outline p-4 min-h-32 items-center justify-center">
             <h2 className="text-xl font-bold">{cleanQuestion}</h2>
           </div>
 
           <div className="md:m-10 pt-10 mx-4">
             <div className="space-y-2">
-              {question.incorrect_answers
-                .concat(question.correct_answer)
-                .map((answer, index) => {
-                  const isCorrect = answer === question.correct_answer;
-                  const isSelected = selectedAnswer === answer;
-                  const optionClass = isSelected
-                    ? isCorrect
-                      ? "bg-green-400"
-                      : "bg-red-400"
-                    : "bg-white";
+              {shuffledAnswers.map((answer, index) => {
+                const isCorrect = answer === question.correct_answer;
+                const isSelected = selectedAnswer === answer;
+                const optionClass = isSelected
+                  ? isCorrect
+                    ? "bg-green-400"
+                    : "bg-red-400"
+                  : "bg-white";
 
-                  return (
-                    <Button
-                      key={index}
-                      text={answer
-                        .replace(/&quot;/g, '"')
-                        .replace(/&#039;/g, "'")
-                        .replace(/&eacute;/g, "é")
-                        .replace(/&amp;/g, "&")}
-                      onClick={() => handleAnswer(answer)}
-                      className={`w-full text-black outline font-bold py-2 rounded-lg shadow-xl transition duration-300 ${optionClass}`}
-                    />
-                  );
-                })}
+                return (
+                  <Button
+                    key={index}
+                    text={answer
+                      .replace(/&quot;/g, '"')
+                      .replace(/&#039;/g, "'")
+                      .replace(/&eacute;/g, "é")
+                      .replace(/&amp;/g, "&")}
+                    onClick={() => handleAnswer(answer)}
+                    className={`w-full text-black outline font-bold py-2 rounded-lg shadow-xl transition duration-300 ${optionClass}`}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
@@ -215,29 +233,25 @@ const Quiz = () => {
     const wrongAnswers = totalQuestions - correctAnswersCount;
 
     return (
-      <div className="flex items-center max-w-full justify-center min-h-screen mx-10">
-        <div className="flex flex-col w-full sm:max-w-96 bg-white shadow-md rounded-lg p-8 justify-center">
-        <h2 className="text-2xl font-bold mb-4">Results</h2>
-        <p className="mb-4">You answered {userAnswers.length} questions.</p>
-        <p className="mb-4">Correct Answers: {correctAnswersCount}</p>
-        <p className="mb-4">Wrong Answers: {wrongAnswers}</p>
-        <p className="mb-4">Total Questions: {totalQuestions}</p>
-        <button
-          onClick={handleRestartQuiz}
-          className="w-full bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-900 transition duration-300 mt-4"
-        >
-          Restart Quiz
-        </button>
-      </div>
+      <div className="flex items-center  max-w-full justify-center min-h-screen mx-10">
+        <div className="flex flex-col outline w-full sm:max-w-96 bg-white shadow-md rounded-lg p-8 justify-center">
+          <h2 className="text-2xl font-bold mb-4">Results</h2>
+          <p className="mb-4">You answered {userAnswers.length} questions.</p>
+          <p className="mb-4">Correct Answers: {correctAnswersCount}</p>
+          <p className="mb-4">Wrong Answers: {wrongAnswers}</p>
+          <Button
+            text="Restart Quiz"
+            onClick={handleRestartQuiz}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-4"
+          />
+        </div>
       </div>
     );
   };
 
   return (
-    <div className="min-h-screen flex justify-center md:items-center font-nunito bg-blue-500 ">
-      <div className="w-full">
-        {showResults ? renderResults() : renderQuestion()}
-      </div>
+    <div className="bg-blue-500 font-nunito">
+      {showResults ? renderResults() : renderQuestion()}
     </div>
   );
 };
