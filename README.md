@@ -15,8 +15,8 @@ A simple anime quiz application built with React and Redux Toolkit, styled with 
 
 You can access the live version of the quiz app [here](https://annisaulfa11.github.io/quiz-app/).
 Use the following credentials to login:
-Email: eve.holt@reqres.in
-Password: cityslicka
+- Email: eve.holt@reqres.in
+- Password: cityslicka
 
 ## Tech Stack
 
