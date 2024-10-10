@@ -13890,7 +13890,7 @@ const Iu = ({ text: e, type: t, onClick: n, className: r }) =>
       [n, r] = N.useState(0),
       [o, i] = N.useState([]),
       [l, s] = N.useState(!1),
-      [u, a] = N.useState(60),
+      [u, a] = N.useState(30),
       [c, f] = N.useState(0),
       [m, v] = N.useState(null),
       y = N.useRef(null),
@@ -13966,7 +13966,7 @@ const Iu = ({ text: e, type: t, onClick: n, className: r }) =>
           r(0),
           i([]),
           s(!1),
-          a(60),
+          a(30),
           f(0),
           p();
       },
@@ -14007,7 +14007,7 @@ const Iu = ({ text: e, type: t, onClick: n, className: r }) =>
               children: [
                 P.jsx("div", {
                   className:
-                    "flex bg-white md:mx-10 md:mt-28 mt-20 mx-4 shadow-md rounded-lg outline p-4 min-h-32 items-center justify-center",
+                    "flex bg-white md:mx-10 md:mt-28 mx-4 shadow-md rounded-lg outline p-4 min-h-32 items-center justify-center",
                   children: P.jsx("h2", {
                     className: "text-xl font-bold",
                     children: j,
@@ -14052,10 +14052,10 @@ const Iu = ({ text: e, type: t, onClick: n, className: r }) =>
           j = x - c;
         return P.jsx("div", {
           className:
-            "flex items-center max-w-full justify-center min-h-screen mx-10",
+            "flex items-center  max-w-full justify-center min-h-screen mx-10",
           children: P.jsxs("div", {
             className:
-              "flex flex-col w-full sm:max-w-96 bg-white shadow-md rounded-lg p-8 justify-center",
+              "flex flex-col outline w-full sm:max-w-96 bg-white shadow-md rounded-lg p-8 justify-center",
             children: [
               P.jsx("h2", {
                 className: "text-2xl font-bold mb-4",
