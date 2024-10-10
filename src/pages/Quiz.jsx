@@ -1,9 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import Button from "../components/Button";
 import correctSound from "../assets/correct.wav"; 
-import correctSound from "../assets/correct.wav";
 import incorrectSound from "../assets/incorrect.wav";
-import backgroundMusic from "../assets/background.mp3";
 import backgroundMusic from "../assets/background.mp3";
 import { useDispatch } from "react-redux";
 import { fetchQuestions } from "../redux/features/quizSlice";
@@ -18,7 +16,6 @@ const Quiz = () => {
   const [timeLeft, setTimeLeft] = useState(60);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null); 
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const timerRef = useRef(null);
   const audioRef = useRef(new Audio());
   const backgroundMusicRef = useRef(new Audio(backgroundMusic));
@@ -69,18 +66,18 @@ const Quiz = () => {
 
   const startTimer = () => {
     clearInterval(timerRef.current);
-    // timerRef.current = setInterval(() => {
-    //   setTimeLeft((prevTime) => {
-    //     if (prevTime <= 1) {
-    //       clearInterval(timerRef.current);
-    //       handleEndQuiz();
-    //       return 0;
-    //     }
-    //     const newTime = prevTime - 1;
-    //     localStorage.setItem("timeLeft", newTime);
-    //     return newTime;
-    //   });
-    // }, 1000);
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime <= 1) {
+          clearInterval(timerRef.current);
+          handleEndQuiz();
+          return 0;
+        }
+        const newTime = prevTime - 1;
+        localStorage.setItem("timeLeft", newTime);
+        return newTime;
+      });
+    }, 1000);
   };
 
   const playSound = (isCorrect) => {
