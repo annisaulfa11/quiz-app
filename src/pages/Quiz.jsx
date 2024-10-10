@@ -1,7 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import Button from "../components/Button";
+import correctSound from "../assets/correct.wav"; 
 import correctSound from "../assets/correct.wav";
 import incorrectSound from "../assets/incorrect.wav";
+import backgroundMusic from "../assets/background.mp3";
 import backgroundMusic from "../assets/background.mp3";
 import { useDispatch } from "react-redux";
 import { fetchQuestions } from "../redux/features/quizSlice";
@@ -15,6 +17,7 @@ const Quiz = () => {
   const [showResults, setShowResults] = useState(false);
   const [timeLeft, setTimeLeft] = useState(60);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(null); 
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const timerRef = useRef(null);
   const audioRef = useRef(new Audio());
@@ -137,7 +140,7 @@ const Quiz = () => {
     setTimeLeft(60);
     setCorrectAnswersCount(0);
 
-    // Start timer after resetting state
+    
     startTimer();
   };
 

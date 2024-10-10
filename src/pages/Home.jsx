@@ -22,6 +22,7 @@ const Home = () => {
   };
 
   const startQuiz = () => {
+    navigate("/quiz-app/quiz"); 
     navigate("/quiz-app/quiz");
   };
 
